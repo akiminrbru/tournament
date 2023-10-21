@@ -3,7 +3,7 @@ import styles from "../RegisterPage/RegisterPage.module.scss";
 import { useForm } from "react-hook-form";
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../../redux";
 import { useDispatch } from "react-redux";
 import { setIsAuth } from "../../../redux/authSlice";
@@ -12,6 +12,7 @@ import { setUserData } from "../../../redux/authSlice";
 const AuthPage = () => {
 	const [loginUser, result] = useLoginUserMutation();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const {
 		register,
@@ -25,8 +26,19 @@ const AuthPage = () => {
 			password: data.password,
 		};
 
-		loginUser(user);
-		dispatch(setIsAuth(true));
+		loginUser(user).then((res) => {
+			console.log(res.error);
+
+			if (res.error) {
+				console.log("Неверный логин или пароль!");
+			} else {
+				console.log(res.data);
+				navigate("/");
+				localStorage.setItem("token", res.data.token);
+				dispatch(setIsAuth(true));
+				dispatch(setUserData(res.data));
+			}
+		});
 	};
 
 	return (

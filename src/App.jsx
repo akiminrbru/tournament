@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RegisterPage from "./components/pages/RegisterPage/RegisterPage";
 import AuthPage from "./components/pages/AuthPage/AuthPage";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import CreateTeamPage from "./components/pages/CreateTeamPage/CreateTeamPage";
 import CreateTournamentPage from "./components/pages/CreateTournamentPage/CreateTournamentPage";
 import TournamentPage from "./components/pages/TournamentPage/TournamentPage";
 import DetailTournament from "./components/pages/DetailTournament/DetailTournament";
+import { useSelector } from "react-redux";
+import { useGetAuthMutation } from "./redux";
 
 const routerAuth = [
 	{
@@ -54,7 +56,29 @@ const routerNotAuth = [
 ];
 
 const App = () => {
-	const [isAuth, setIsAuth] = useState(true);
+	// const [isAuth, setIsAuth] = useState(true);
+	const isAuth = useSelector((state) => state.auth.isAuth);
+	const data = useSelector((state) => state.auth.data);
+
+	const [getAuth, result] = useGetAuthMutation();
+
+	// console.log(isAuth);
+
+	// console.log(data);
+
+	useEffect(() => {
+		// getAuth().then((res) => console.log(res));
+
+		fetch("https://dev.darksecrets.ru/api/user/profile", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		})
+			.then((res) => console.log(res))
+			.catch((err) => console.log(err));
+	}, [isAuth]);
 
 	const router = createBrowserRouter(isAuth ? routerAuth : routerNotAuth);
 	return (

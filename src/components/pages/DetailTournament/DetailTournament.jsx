@@ -4,6 +4,7 @@ import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 import "../../../index.scss";
 import ball from "../../../assets/images/ball.png";
+import { TournamentBracket } from "../../TournamentBracket/TournamentBracket";
 
 const DetailTournament = () => {
 	const [lastGames, setLastGames] = useState([
@@ -45,9 +46,10 @@ const DetailTournament = () => {
 							<div className={styles.detailTournament__status}>Статус: Opened</div>
 						</div>
 						<div>
-							<h2>Послдение игры</h2>
+							<h2>Последение игры</h2>
 							<LastGames data={lastGames}></LastGames>
 						</div>
+						<TournamentBracket></TournamentBracket>
 					</div>
 				</div>
 			</main>

@@ -1,4 +1,6 @@
 .detailTournament {
+    background: #f6f7f8;
+
     &__inner {
         padding-top: 24px;
         padding-bottom: 300px;
@@ -8,6 +10,10 @@
             font-family: "Tinkoff Sans Medium";
             font-size: 36px;
             font-weight: 500;
+        }
+
+        h2 {
+            margin-bottom: 24px;
         }
     }
 
@@ -33,6 +39,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-bottom: 30px;
 
     &__row {
         display: grid;
@@ -101,4 +108,25 @@
             width: 29px;
         }
     }
+}
+
+.tournamentBracket {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match {
+    display: flex;
+    justify-content: space-around;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.team {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px;
+    width: 100px;
+    text-align: center;
 }

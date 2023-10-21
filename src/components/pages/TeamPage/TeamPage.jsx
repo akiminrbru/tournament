@@ -5,6 +5,7 @@ import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 import { TeamCard } from "./TeamCard";
 import searchIcon from "../../../assets/images/search.svg";
+import { Link } from "react-router-dom";
 
 const TeamPage = () => {
 	return (
@@ -19,7 +20,7 @@ const TeamPage = () => {
 								<button>
 									<img src={searchIcon} alt="" />
 								</button>
-								<a href="#">Зарегистрировать команду</a>
+								<Link to={"/teams/createTeam"}>Зарегистрировать команду</Link>
 							</div>
 						</div>
 						<div className={styles.team__list}>
